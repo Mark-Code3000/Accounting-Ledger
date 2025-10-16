@@ -10,7 +10,38 @@ public class AccountingLedgerApp {
 
     public static void main(String[] args) {
 
+        boolean working = true;
+        while (working) {
 
+
+            String option = homeScreen();
+
+            switch (option.toUpperCase()) {
+                case "A":
+                    System.out.println("In case A");
+                    break;
+
+                case "P":
+                    System.out.println("In case P");
+                    break;
+
+                case "V":
+                    System.out.println("In case V");
+                    break;
+                case "E":
+                    System.out.println("In case E");
+                    working = false;
+                    break;
+
+                default:
+                    System.out.println("invalid selection");
+
+            }
+        }
+
+
+    }
+    public static String homeScreen(){
         //intro to user menu
         //What would you like to do
         //list options
@@ -23,9 +54,9 @@ public class AccountingLedgerApp {
                \tView Receipts(V)
                \tExit menu(E)
                 """);;
-
-
-
+        // user makes selection
+        return scanner.nextLine();
 
     }
+
 }

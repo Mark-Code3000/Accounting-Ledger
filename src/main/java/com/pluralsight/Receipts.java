@@ -1,15 +1,17 @@
+
 package com.pluralsight;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+//create object using constructor
 public class Receipts {
     private LocalDate date;
     private LocalTime time;
     private String description;
     private String vendor;
     private double amount;
-
+    //create getter to reference our data
     public LocalDate getDate() {
         return date;
     }
@@ -37,4 +39,9 @@ public class Receipts {
         this.vendor = vendor;
         this.amount = amount;
     }
+
+
+
+
+
 }
