@@ -23,30 +23,7 @@ public class AccountingLedgerApp {
 
             switch (option.toUpperCase()) {
                 case "A":
-                    System.out.println("What is the vendor?");
-                    String vendor = scanner.nextLine();
-                    System.out.println("What is the item description?");
-                    String description = scanner.nextLine();
-                    System.out.println("How much are you paying?");
-                    double amout = scanner.nextDouble();
-
-                    //the will eat the next like to avoid problems
-                    scanner.nextLine();
-
-                    // creating receipt from user input
-                    Receipts newDeposit = new Receipts(LocalDate.now(),LocalTime.now(),description,vendor,amout);
-
-                    try{
-                        BufferedWriter receiptsCsv = new BufferedWriter(new FileWriter("src/main/resources/receipts.csv",true));
-                        //add new line to csv file
-                        receiptsCsv.newLine();
-                        receiptsCsv.write(newDeposit.getDate()+"|"+newDeposit.getTime()+"|"+newDeposit.getDescription()+"|"+newDeposit.getVendor()+"|"+newDeposit.getAmount());
-                        System.out.println("Thank you for making a deposit");
-                        receiptsCsv.close();
-
-                    }catch (IOException e){
-                        System.out.println("could not complete action"+e);
-                    }
+                    depositScreen();
 
                     break;
 
@@ -87,5 +64,30 @@ public class AccountingLedgerApp {
         return scanner.nextLine();
 
     }
+    public static void depositScreen(){
+        System.out.println("What is the vendor?");
+        String vendor = scanner.nextLine();
+        System.out.println("What is the item description?");
+        String description = scanner.nextLine();
+        System.out.println("How much are you paying?");
+        double amout = scanner.nextDouble();
 
+        //the will eat the next like to avoid problems
+        scanner.nextLine();
+
+        // creating receipt from user input
+        Receipts newDeposit = new Receipts(LocalDate.now(),LocalTime.now(),description,vendor,amout);
+
+        try{
+            BufferedWriter receiptsCsv = new BufferedWriter(new FileWriter("src/main/resources/receipts.csv",true));
+            //add new line to csv file
+            receiptsCsv.newLine();
+            receiptsCsv.write(newDeposit.getDate()+"|"+newDeposit.getTime()+"|"+newDeposit.getDescription()+"|"+newDeposit.getVendor()+"|"+newDeposit.getAmount());
+            System.out.println("Thank you for making a deposit");
+            receiptsCsv.close();
+
+        }catch (IOException e){
+            System.out.println("could not complete action"+e);
+        }
+    }
 }
