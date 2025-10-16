@@ -1,0 +1,1 @@
+This will project is to display my understanding of basic java fundementals with accounting ledger app that will allow a user to navigate different screens for debits and payments while sorting by various parameters like time/date and vendor/seller 
