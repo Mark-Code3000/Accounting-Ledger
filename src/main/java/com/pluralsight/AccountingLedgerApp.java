@@ -3,7 +3,6 @@ package com.pluralsight;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -82,6 +81,7 @@ public class AccountingLedgerApp {
         // creating a new receipt from user input
         Receipts newDeposit = new Receipts(LocalDate.now(),LocalTime.now(),description,vendor,amount);
 
+        //this will write to our csv file and allow us to update it
         try{
             BufferedWriter receiptsCsv = new BufferedWriter(new FileWriter("src/main/resources/receipts.csv",true));
             //add new line to csv file
@@ -89,7 +89,7 @@ public class AccountingLedgerApp {
             receiptsCsv.write(newDeposit.getDate()+"|"+newDeposit.getTime()+"|"+newDeposit.getDescription()+"|"+newDeposit.getVendor()+"|"+newDeposit.getAmount());
             System.out.println("Thank you for making a deposit!");
             receiptsCsv.close();
-
+        //this will attempt to notify us in the case of an error when trying to locate the csv file
         }catch (IOException e){
             System.out.println("could not complete action"+e);
         }
@@ -116,7 +116,7 @@ public class AccountingLedgerApp {
             receiptsCsv.write(newPayment.getDate()+"|"+newPayment.getTime()+"|"+newPayment.getDescription()+"|"+newPayment.getVendor()+"|"+newPayment.getAmount());
             System.out.println("Thank you for making a payment!");
             receiptsCsv.close();
-
+        //this will attempt to notify us in the case of an error when trying to locate the csv file
         }catch (IOException e){
             System.out.println("could not complete action"+e);
         }
