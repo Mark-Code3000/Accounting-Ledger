@@ -12,15 +12,17 @@ public class AccountingLedgerApp {
     //create scanner that can take user input
     public static Scanner scanner = new Scanner(System.in);
 
-
+    //main class to run our app
     public static void main(String[] args) {
 
+        //here we have a variable to check and see if our is running
         boolean working = true;
         while (working) {
 
 
             String option = homeScreen();
-
+            //below is a switch case for our screen/menu options
+            //each option will take the user to a different screen in our app
             switch (option.toUpperCase()) {
                 case "A":
                     depositScreen();
@@ -64,19 +66,20 @@ public class AccountingLedgerApp {
         return scanner.nextLine();
 
     }
+    //this will make a method for the deposit screen
     public static void depositScreen(){
         System.out.println("What is the vendor?");
         String vendor = scanner.nextLine();
         System.out.println("What is the item description?");
         String description = scanner.nextLine();
         System.out.println("How much are you paying?");
-        double amout = scanner.nextDouble();
+        double amount = scanner.nextDouble();
 
-        //the will eat the next like to avoid problems
+        //this will eat the next like to avoid problems
         scanner.nextLine();
 
-        // creating receipt from user input
-        Receipts newDeposit = new Receipts(LocalDate.now(),LocalTime.now(),description,vendor,amout);
+        // creating a new receipt from user input
+        Receipts newDeposit = new Receipts(LocalDate.now(),LocalTime.now(),description,vendor,amount);
 
         try{
             BufferedWriter receiptsCsv = new BufferedWriter(new FileWriter("src/main/resources/receipts.csv",true));
