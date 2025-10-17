@@ -30,7 +30,7 @@ public class AccountingLedgerApp {
                     break;
 
                 case "P":
-                    System.out.println("In case P");
+                    paymentScreen();
                     break;
 
                 case "V":
@@ -68,11 +68,12 @@ public class AccountingLedgerApp {
     }
     //this will make a method for the deposit screen
     public static void depositScreen(){
+        System.out.println("You are making a deposit");
         System.out.println("What is the vendor?");
         String vendor = scanner.nextLine();
         System.out.println("What is the item description?");
         String description = scanner.nextLine();
-        System.out.println("How much are you paying?");
+        System.out.println("How much are you depositing?");
         double amount = scanner.nextDouble();
 
         //this will eat the next like to avoid problems
@@ -86,7 +87,34 @@ public class AccountingLedgerApp {
             //add new line to csv file
             receiptsCsv.newLine();
             receiptsCsv.write(newDeposit.getDate()+"|"+newDeposit.getTime()+"|"+newDeposit.getDescription()+"|"+newDeposit.getVendor()+"|"+newDeposit.getAmount());
-            System.out.println("Thank you for making a deposit");
+            System.out.println("Thank you for making a deposit!");
+            receiptsCsv.close();
+
+        }catch (IOException e){
+            System.out.println("could not complete action"+e);
+        }
+    }
+    public static void paymentScreen() {
+        System.out.println("You are making a payment");
+        System.out.println("What is the vendor?");
+        String vendor = scanner.nextLine();
+        System.out.println("What is the item description?");
+        String description = scanner.nextLine();
+        System.out.println("How much are you paying?");
+        double amount = scanner.nextDouble();
+
+        //this will eat the next like to avoid problems
+        scanner.nextLine();
+
+        // creating a new receipt from user input
+        Receipts newPayment = new Receipts(LocalDate.now(),LocalTime.now(),description,vendor,-amount);
+
+        try{
+            BufferedWriter receiptsCsv = new BufferedWriter(new FileWriter("src/main/resources/receipts.csv",true));
+            //add new line to csv file
+            receiptsCsv.newLine();
+            receiptsCsv.write(newPayment.getDate()+"|"+newPayment.getTime()+"|"+newPayment.getDescription()+"|"+newPayment.getVendor()+"|"+newPayment.getAmount());
+            System.out.println("Thank you for making a payment!");
             receiptsCsv.close();
 
         }catch (IOException e){
